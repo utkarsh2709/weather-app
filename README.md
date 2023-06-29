@@ -2,6 +2,8 @@
 
 Check the current weather on any city on the planet. Switch between different cities.
 
+Hosted Link: [weather-app.com](https://utkarsh2709.github.io/weather-app/)
+
 ## Features
 
 1. User's ability to search cities
