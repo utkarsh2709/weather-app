@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Weather Application</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-	<!-- <script>
-		function displayDate() {
-			document.getElementById("show").innerHTML = Date();
-		}
-	</script> -->
 </head>
-<body>
+
+<body onload="getResults()">
 	<div class="app-wrap">
 		<header>
-			<input type="text" autocomplete="off" class="search-box" 
-			placeholder="Enter your city... ">
+			<input type="text" autocomplete="off" id="search" class="search-box" placeholder="Enter your city... ">
+			<button onclick="getResults()">Search</button>
 		</header>
 		<main>
 			<section class="location">
-				<div class="city">Mathura, India</div>
-				<!-- <button type="button" onclick="displayDate()">Show Date</button> -->
-				<div class="date" id="show">Tuesday 9 June 2020</div>
+				<p class="city"></p>
+				<p class="date" id="show"></p>
 			</section>
 			<div class="current">
-				<div class="temp">40<span>°c</span></div>
-				<div class="weather">Clear</div>
-				<div class="hi-low">32°c / 42°c</div>
+				<p class="temp"><span>°c</span></p>
+				<p class="weather"></p>
+				<p class="hi-low"></p>
 			</div>
 		</main>
 	</div>
 	<script type="text/javascript" src="main.js"></script>
 </body>
+
 </html>

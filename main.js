@@ -3,48 +3,36 @@ const api = {
 	base: "http://api.openweathermap.org/data/2.5/"
 }
 
-const searchbox = document.querySelector('.search-box');
-searchbox.addEventListener('keypress', setQuery);
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-function setQuery(evt) {
-  if (evt.keyCode == 13) {
-    getResults(searchbox.value);
-  }
+(() => {
+	let now = new Date();
+	let dates = document.querySelector('.location .date');
+	let day = days[now.getDay()];
+	let date = now.getDate();
+	let month = months[now.getMonth()];
+	let year = now.getFullYear();
+	dates.innerText = `${day} ${date} ${month} ${year}`;
+})();
+
+async function getResults() {
+	const searchbox = document.getElementById('search').value;
+	const data = await fetch(`${api.base}weather?q=${(searchbox === '') ? 'Mathura' : searchbox}&appid=${api.key}&units=metric`);
+	const weather = await data.json();
+	return displayResults(weather);
 }
 
-function getResults (query) {
-  fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-      return weather.json();
-    }).then(displayResults);
-}
+const displayResults = (weather) => {
+	let city = document.querySelector('.location .city');
+	city.innerText = `${weather.name}, ${weather.sys.country}`;
 
-function displayResults (weather) {
-  let city = document.querySelector('.location .city');
-  city.innerText = `${weather.name}, ${weather.sys.country}`;
+	let temp = document.querySelector('.current .temp');
+	temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
 
-  let now = new Date();
-  let date = document.querySelector('.location .date');
-  date.innerText = dateBuilder(now);
+	let weather_el = document.querySelector('.current .weather');
+	weather_el.innerText = weather.weather[0].main;
 
-  let temp = document.querySelector('.current .temp');
-  temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
-
-  let weather_el = document.querySelector('.current .weather');
-  weather_el.innerText = weather.weather[0].main;
-
-  let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
-}
-
-function dateBuilder (d) {
-  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
-
-  return `${day} ${date} ${month} ${year}`;
+	let hilow = document.querySelector('.hi-low');
+	hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
 }
