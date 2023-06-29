@@ -12,11 +12,7 @@ Check the current weather on any city on the planet. Switch between different ci
 
 4. Minimum and maximum temperatures
 
-5. Sunrise and sunset times
-
-6. Metric vs Imperial system
-
-7. Error handling and loading info
+5. Error handling and loading info
 
 ## Installation
 
