@@ -1,6 +1,6 @@
 const api = {
 	key: "9a419ce112c69c8af7c75d2eb28737c0",
-	base: "http://api.openweathermap.org/data/2.5/"
+	base: "https://api.openweathermap.org/data/2.5/"
 }
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
